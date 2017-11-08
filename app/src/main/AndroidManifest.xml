@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ethanmann.omnibus">
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/omnibus_app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAZHbFkBJRc2-l06UH1dEbAw5x8evcUTUE" />
+        <activity android:name=".Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".StudentHome" android:parentActivityName=".Login" android:label="Home"></activity>
+        <activity android:name=".Settings" android:parentActivityName=".Login" android:label="Settings"></activity>
+        <activity android:name=".DriverHome" android:parentActivityName=".Login" android:label="Home"></activity>
+    </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

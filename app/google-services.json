@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "891393428287",
+    "firebase_url": "https://omnidelta-omnibus.firebaseio.com",
+    "project_id": "omnidelta-omnibus",
+    "storage_bucket": "omnidelta-omnibus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891393428287:android:1cfaf1960f80121b",
+        "android_client_info": {
+          "package_name": "com.example.ethanmann.omnibus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891393428287-b38vgt106eg2i7dggdclurr94505aa4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM3QiZFQCYx_gK9Zx1KHhJifdLZwKnWXs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
