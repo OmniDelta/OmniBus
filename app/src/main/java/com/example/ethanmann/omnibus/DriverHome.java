@@ -37,24 +37,22 @@ public class DriverHome extends AppCompatActivity {
         setContentView(R.layout.driver_home);
         t = (TextView) findViewById(R.id.textView);
 
+        //hooks into the listView and ties the adapter to it
         final ListView listView = (ListView) findViewById(R.id.adlist);
-        // Create a new Adapter
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1);
-
-        // Assign adapter to ListView
         listView.setAdapter(adapter);
 
         // Connect to the Firebase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         // Get a reference to the todoItems child items it the database
-        final DatabaseReference myRef = database.getReference("todoItems");
-        final DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("todoItems").child("test");
+        final DatabaseReference Address = database.getReference("todoItems");
+        final DatabaseReference busLocation = database.getReference("locationtrack");
 
         // Assign a listener to detect changes to the child items
         // of the database reference.
-        myRef.addChildEventListener(new ChildEventListener(){
+        Address.addChildEventListener(new ChildEventListener(){
 
             // This function is called once for each child that exists
             // when the listener is added. Then it is called
@@ -88,7 +86,7 @@ public class DriverHome extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Query myQuery = myRef.orderByValue().equalTo((String)
+                Query myQuery = Address.orderByValue().equalTo((String)
                         listView.getItemAtPosition(position));
 
                 myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -113,8 +111,8 @@ public class DriverHome extends AppCompatActivity {
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                t.setText("\n " + location.getLatitude() + " " + location.getLongitude());
-                ref1.setValue(location.getLatitude() + " " + location.getLongitude());
+                t.setText(location.getLatitude() + ", " + location.getLongitude());
+                busLocation.setValue(location.getLatitude() + "," + location.getLongitude());
             }
 
             @Override
