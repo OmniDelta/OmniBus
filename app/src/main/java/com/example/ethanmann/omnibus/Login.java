@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.omnibus.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,9 +16,6 @@ public class Login extends AppCompatActivity {
     {
         Intent student = new Intent(this, StudentHome.class);
         Intent driver = new Intent(this, DriverHome.class);
-        //EditText editText = (EditText) findViewById(R.id.username);
-        //String message = editText.getText().toString();
-        //home.putExtra(EXTRA_MESSAGE, message);
         if(((EditText)findViewById(R.id.username)).getText().toString().equalsIgnoreCase("student")) //checks if user is student
             startActivity(student); //take user to student side of app
         else
