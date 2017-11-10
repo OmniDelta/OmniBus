@@ -9,9 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,13 +32,13 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import com.google.firebase.database.ChildEventListener;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.util.Log;
+
 import android.widget.ArrayAdapter;
 
 public class StudentHome extends AppCompatActivity implements OnMapReadyCallback, DirectionFinderListener {
@@ -58,6 +57,42 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Intent intent = getIntent();
+
+
+        // Connect to the Firebase database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        // Get a reference to the todoItems child items it the database
+        final DatabaseReference myRef = database.getReference("todoItems");
+        final DatabaseReference busLocationDB = database.getReference("locationtrack");
+
+        busLocationDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String location = dataSnapshot.getValue(String.class);
+                busLocation=location;
+                System.out.println("BUS LOCATION IS: " + busLocation);
+                sendRequest();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+        final Button button = (Button) findViewById(R.id.btnFindPath);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                // Create a new child with a auto-generated ID.
+                DatabaseReference childRef = myRef.push();
+
+                // Set the child's data to the value passed in from the text box.
+                childRef.setValue("136 Palamar Drive");
+
+            }
+        });
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Settings.initSettings();
         getLocation();
@@ -70,86 +105,10 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1);
 
-
-        // Connect to the Firebase database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        // Get a reference to the todoItems child items it the database
-        final DatabaseReference myRef = database.getReference("todoItems");
-
-        myRef.addChildEventListener(new ChildEventListener(){
-
-            // This function is called once for each child that exists
-            // when the listener is added. Then it is called
-            // each time a new child is added.
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                String value = dataSnapshot.getValue(String.class);
-                adapter.add(value);
-            }
-
-            // This function is called each time a child item is removed.
-            public void onChildRemoved(DataSnapshot dataSnapshot){
-                String value = dataSnapshot.getValue(String.class);
-                adapter.remove(value);
-            }
-
-            // The following functions are also required in ChildEventListener implementations.
-            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName){}
-            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName){}
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG:", "Failed to read value.", error.toException());
-            }
-        });
-
-
-        //this is the location read auto thing
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                busLocation = value;
-            }
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
-        final Button button = (Button) findViewById(R.id.btnFindPath);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                // Create a new child with a auto-generated ID.
-                DatabaseReference childRef = myRef.push();
-
-                // Set the child's data to the value passed in from the text box.
-                childRef.setValue("136 Palamar Drive");
-                for(int x=0;x<100;x++)
-                    System.out.println("SENT SENT SENT");
-
-            }
-        });
     }
 
 
     private void sendRequest() {
-        //String origin = "380 fallowfield road";
-        //String destination = "165 palamar drive";
-        if (userLocation.isEmpty()) {
-            Toast.makeText(this, "Can't find your location!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (busLocation.isEmpty()) {
-            Toast.makeText(this, "Can't find bus location!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         try {
             new DirectionFinder(this, userLocation, busLocation).execute();
         } catch (UnsupportedEncodingException e) {
@@ -160,20 +119,18 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng school = new LatLng(10.762963, 106.682394);
+        LatLng school = new LatLng(41.224962, -73.185090);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(school, 18));
         originMarkers.add(mMap.addMarker(new MarkerOptions()
                 .title("Fairchild Wheeler")
-                .position(school)));
+                .position(school)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_location))));
         mMap.setMyLocationEnabled(true);
     }
 
 
     @Override
     public void onDirectionFinderStart() {
-        progressDialog = ProgressDialog.show(this, "Please wait.",
-                "Finding Bus...", true);
-
         if (originMarkers != null) {
             for (Marker marker : originMarkers) {
                 marker.remove();
@@ -195,19 +152,18 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        progressDialog.dismiss();
         polylinePaths = new ArrayList<>();
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.endLocation, 16));
-            //if(((Switch) findViewById(R.id.eta)).isChecked()) {
-            //    ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.getArrival());
-            //}
-            //else {
-            ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
-            //}
+            if(false){//((Switch) findViewById(R.id.eta)).isChecked()) {
+                ((TextView) findViewById(R.id.eta)).setText(route.duration.getArrival());
+            }
+            else {
+            ((TextView) findViewById(R.id.eta)).setText(route.duration.text);
+            }
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
             originMarkers.add(mMap.addMarker(new MarkerOptions()
@@ -216,7 +172,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
                     .position(route.startLocation)));
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_location))
-                    .title(route.endAddress)
+                    .title("Bus")
                     .position(route.endLocation)));
 
             PolylineOptions polylineOptions = new PolylineOptions().
