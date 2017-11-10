@@ -80,7 +80,7 @@
         android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/tvDuration"
+        android:id="@+id/eta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -123,7 +123,7 @@
         android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/editText2"
+        android:id="@+id/etaLabel"
         android:layout_width="133dp"
         android:layout_height="49dp"
         android:layout_marginBottom="8dp"

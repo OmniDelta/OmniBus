@@ -9,9 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,13 +32,13 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import com.google.firebase.database.ChildEventListener;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.util.Log;
+
 import android.widget.ArrayAdapter;
 
 public class StudentHome extends AppCompatActivity implements OnMapReadyCallback, DirectionFinderListener {
@@ -58,9 +57,10 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Intent intent = getIntent();
+
+
         // Connect to the Firebase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-
         // Get a reference to the todoItems child items it the database
         final DatabaseReference myRef = database.getReference("todoItems");
         final DatabaseReference busLocationDB = database.getReference("locationtrack");
@@ -123,7 +123,8 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(school, 18));
         originMarkers.add(mMap.addMarker(new MarkerOptions()
                 .title("Fairchild Wheeler")
-                .position(school)));
+                .position(school)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_location))));
         mMap.setMyLocationEnabled(true);
     }
 
@@ -157,12 +158,12 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.endLocation, 16));
-            //if(((Switch) findViewById(R.id.eta)).isChecked()) {
-            //    ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.getArrival());
-            //}
-            //else {
-            ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
-            //}
+            if(false){//((Switch) findViewById(R.id.eta)).isChecked()) {
+                ((TextView) findViewById(R.id.eta)).setText(route.duration.getArrival());
+            }
+            else {
+            ((TextView) findViewById(R.id.eta)).setText(route.duration.text);
+            }
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
             originMarkers.add(mMap.addMarker(new MarkerOptions()
@@ -171,7 +172,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
                     .position(route.startLocation)));
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_location))
-                    .title(route.endAddress)
+                    .title("Bus")
                     .position(route.endLocation)));
 
             PolylineOptions polylineOptions = new PolylineOptions().

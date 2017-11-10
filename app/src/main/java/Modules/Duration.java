@@ -1,5 +1,8 @@
 package Modules;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Duration {
     public String text;
@@ -10,6 +13,6 @@ public class Duration {
         this.value = value;
     }
     public String getArrival(){
-        return "yes";
+        return("Yes");
     }
 }
