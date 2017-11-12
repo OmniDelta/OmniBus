@@ -10,6 +10,6 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings);
     }
     public static void initSettings(){
-
+        //reads users settings from DB, sets appropriate variables and toggles state of settings on settings page
     }
 }

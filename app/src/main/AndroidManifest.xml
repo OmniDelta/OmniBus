@@ -21,6 +21,7 @@
         <activity android:name=".StudentHome" android:parentActivityName=".Login" android:label="Home"></activity>
         <activity android:name=".Settings" android:parentActivityName=".Login" android:label="Settings"></activity>
         <activity android:name=".DriverHome" android:parentActivityName=".Login" android:label="Home"></activity>
+        <activity android:name=".Dev" android:parentActivityName=".Login" android:label="DEV PAGE"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
