@@ -38,7 +38,7 @@ public class DriverHome extends AppCompatActivity {
         t = (TextView) findViewById(R.id.textView);
 
         //hooks into the listView and ties the adapter to it
-        final ListView listView = (ListView) findViewById(R.id.adlist);
+        final ListView listView = (ListView) findViewById (R.id.adlist);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1);
         listView.setAdapter(adapter);

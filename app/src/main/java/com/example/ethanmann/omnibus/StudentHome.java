@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.LocationListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -50,13 +52,54 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
     private ProgressDialog progressDialog;
     private String userLocation = "";
     private String busLocation = "";
-    LocationManager locationManager;
+    private LocationManager locationManager;
+    private LocationListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Intent intent = getIntent();
+
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                userLocation = location.getLatitude() + "," + location.getLongitude();
+                System.out.println("USER LOCATION IS: " + userLocation);
+                sendRequest();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+                Intent i = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(i);
+            }
+        };
+
+        // first check for permissions
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET}
+                        ,10);
+            }
+            return;
+        }
+        locationManager.requestLocationUpdates("gps", 100, 0, listener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 0, listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 0, listener);
 
 
         // Connect to the Firebase database
@@ -93,9 +136,9 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
         Settings.initSettings();
-        getLocation();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -109,6 +152,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
 
     private void sendRequest() {
+        System.out.println("STARTING REQUEST WITH USER LOCATION [" + userLocation + "] AND BUS LOCATION [" + busLocation + "]");
         try {
             new DirectionFinder(this, userLocation, busLocation).execute();
         } catch (UnsupportedEncodingException e) {
@@ -212,11 +256,21 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case 1:
-                getLocation();
+        switch (requestCode){
+            case 10:
+                // first check for permissions
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET}
+                                ,10);
+                    }
+                    return;
+                }
+                locationManager.requestLocationUpdates("gps", 100, 0, listener);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 0, listener);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 0, listener);
+                break;
+            default:
                 break;
         }
     }
