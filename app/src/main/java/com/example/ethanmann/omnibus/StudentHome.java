@@ -79,15 +79,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -267,28 +258,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
             polylinePaths.add(mMap.addPolyline(polylineOptions));
         }
     }
-    public void getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        } else {
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            if (location != null) {
-                double latti = location.getLatitude();
-                double longi = location.getLongitude();
-
-                userLocation = latti+","+longi;
-                System.out.println(userLocation);
-            } else {
-
-            }
-        }
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -321,13 +290,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -335,9 +297,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -345,11 +304,11 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        Intent settings = new Intent(this, Settings.class);
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_analytics) {
 
         } else if (id == R.id.nav_businfo) {
@@ -357,7 +316,12 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         } else if (id == R.id.nav_other) {
 
         } else if (id == R.id.nav_settings) {
-
+            startActivity(settings);
+            System.out.println("TEST");
+            System.out.println("TEST");
+            System.out.println("TEST");
+            System.out.println("TEST");
+            System.out.println("TEST");
         } else if (id == R.id.nav_help) {
 
         }
