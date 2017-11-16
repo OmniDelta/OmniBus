@@ -78,7 +78,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 //
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -289,41 +288,36 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Intent settings = new Intent(this, Settings.class);
         int id = item.getItemId();
 
+        Intent home = new Intent(this, StudentHome.class);
+        Intent analytics = new Intent(this, StudentHome.class);
+        Intent businfo = new Intent(this, StudentHome.class);
+        Intent other = new Intent(this, StudentHome.class);
+        Intent settings = new Intent(this, Settings.class);
+        Intent help = new Intent(this, StudentHome.class);
+        Intent feedback = new Intent(this, StudentHome.class);
+        Intent about = new Intent(this, StudentHome.class);
+
         if (id == R.id.nav_home) {
-
+            startActivity(home);
         } else if (id == R.id.nav_analytics) {
-
+            startActivity(analytics);
         } else if (id == R.id.nav_businfo) {
-
+            startActivity(businfo);
         } else if (id == R.id.nav_other) {
-
+            startActivity(other);
         } else if (id == R.id.nav_settings) {
             startActivity(settings);
-            System.out.println("TEST");
-            System.out.println("TEST");
-            System.out.println("TEST");
-            System.out.println("TEST");
-            System.out.println("TEST");
         } else if (id == R.id.nav_help) {
-
+            startActivity(help);
+        } else if (id == R.id.nav_feedback) {
+            startActivity(feedback);
+        } else if (id == R.id.nav_about) {
+            startActivity(about);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
