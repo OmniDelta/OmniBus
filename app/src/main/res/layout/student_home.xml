@@ -20,7 +20,12 @@
         android:baselineAligned="false"
         android:orientation="vertical"
         tools:context="com.example.ethanmann.omnibus.StudentHome">
-
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"/>
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/sizeeeess"
@@ -119,6 +124,7 @@
             map:layout_constraintLeft_toLeftOf="parent"
             map:layout_constraintRight_toRightOf="parent"
             map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintTop_toBottomOf="parent"
             map:layout_constraintVertical_bias="1.0"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
@@ -180,7 +186,7 @@
             tools:ignore="ContentDescription" />
 
     </android.support.constraint.ConstraintLayout>
-    <include
+    <!--<include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -192,5 +198,5 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer" />-->
 </android.support.v4.widget.DrawerLayout>
