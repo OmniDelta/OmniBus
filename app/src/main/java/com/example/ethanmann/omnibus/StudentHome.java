@@ -1,7 +1,5 @@
 package com.example.ethanmann.omnibus;
 
-import android.Manifest;
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,15 +7,14 @@ import android.graphics.Color;
 import android.location.LocationListener;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -39,7 +36,7 @@ import java.util.List;
 import Modules.DirectionFinder;
 import Modules.DirectionFinderListener;
 import Modules.Route;
-import android.content.Context;
+
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
@@ -87,6 +84,15 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 //
+        // first check for permissions
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET}
+                        ,10);
+            }
+            return;
+        }
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         listener = new LocationListener() {
             @Override
@@ -112,15 +118,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
                 startActivity(i);
             }
         };
-
-        // first check for permissions
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET}
-                        ,10);
-            }
-            return;
-        }
         locationManager.requestLocationUpdates("gps", 100, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 0, listener);
@@ -140,7 +137,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        final Button button = (Button) findViewById(R.id.btnFindPath);
+        final Button button = (Button) findViewById(R.id.sendAddress);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -153,7 +150,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
-
 
         Settings.initSettings();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -230,10 +226,10 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.endLocation, 16));
             if(false){//((Switch) findViewById(R.id.eta)).isChecked()) {
-                ((TextView) findViewById(R.id.eta)).setText(route.duration.getArrival());
+                ((TextView) findViewById(R.id.tvEta)).setText(route.duration.getArrival());
             }
             else {
-            ((TextView) findViewById(R.id.eta)).setText(route.duration.text);
+            ((TextView) findViewById(R.id.tvEta)).setText(route.duration.text);
             }
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 

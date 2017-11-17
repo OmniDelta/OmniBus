@@ -26,6 +26,48 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5"/>
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="@dimen/sizeeeess"
+            android:layout_height="@dimen/sizeeeess"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_access_time_black_24dp"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintHorizontal_bias="0.027"
+            map:layout_constraintLeft_toLeftOf="parent"
+            map:layout_constraintRight_toRightOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.111"
+            tools:ignore="ContentDescription"
+            tools:layout_conversion_absoluteHeight="40dp"
+            tools:layout_conversion_absoluteWidth="40dp"
+            tools:layout_conversion_absoluteX="276dp"
+            tools:layout_conversion_absoluteY="90dp" />
+        <TextView
+            android:id="@+id/tvEta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="0 Minutes"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintHorizontal_bias="0.315"
+            map:layout_constraintLeft_toLeftOf="parent"
+            map:layout_constraintRight_toRightOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.186"
+            tools:layout_conversion_absoluteHeight="33dp"
+            tools:layout_conversion_absoluteWidth="63dp"
+            tools:layout_conversion_absoluteX="321dp"
+            tools:layout_conversion_absoluteY="100dp" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/sizeeeess"
@@ -46,7 +88,8 @@
             tools:layout_conversion_absoluteHeight="40dp"
             tools:layout_conversion_absoluteWidth="40dp"
             tools:layout_conversion_absoluteX="276dp"
-            tools:layout_conversion_absoluteY="90dp" />
+            tools:layout_conversion_absoluteY="90dp"
+            />
 
         <TextView
             android:id="@+id/tvDistance"
@@ -69,7 +112,7 @@
             tools:layout_conversion_absoluteY="100dp" />
 
         <ImageView
-            android:id="@+id/imageView22"
+            android:id="@+id/imageView23"
             android:layout_width="@dimen/sizeeeess"
             android:layout_height="@dimen/sizeeeess"
             android:layout_marginBottom="8dp"
@@ -77,61 +120,16 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:padding="5dp"
-            android:src="@mipmap/clock"
+            android:src="@drawable/ic_traffic_black_24dp"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintHorizontal_bias="0.027"
             map:layout_constraintLeft_toLeftOf="parent"
             map:layout_constraintRight_toRightOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.111"
-            tools:ignore="ContentDescription"
-            tools:layout_conversion_absoluteHeight="40dp"
-            tools:layout_conversion_absoluteWidth="40dp"
-            tools:layout_conversion_absoluteX="276dp"
-            tools:layout_conversion_absoluteY="90dp" />
-
+            map:layout_constraintVertical_bias="0.382"
+            tools:ignore="ContentDescription" />
         <TextView
-            android:id="@+id/eta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:text="0 Minutes"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintHorizontal_bias="0.315"
-            map:layout_constraintLeft_toLeftOf="parent"
-            map:layout_constraintRight_toRightOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.186"
-            tools:layout_conversion_absoluteHeight="33dp"
-            tools:layout_conversion_absoluteWidth="63dp"
-            tools:layout_conversion_absoluteX="321dp"
-            tools:layout_conversion_absoluteY="100dp" />
-
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="370dp"
-            android:layout_height="270dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintLeft_toLeftOf="parent"
-            map:layout_constraintRight_toRightOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintTop_toBottomOf="parent"
-            map:layout_constraintVertical_bias="1.0"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1" />
-
-        <TextView
-            android:id="@+id/editText4"
+            android:id="@+id/tvStatus"
             android:layout_width="97dp"
             android:layout_height="30dp"
             android:layout_marginBottom="8dp"
@@ -148,26 +146,27 @@
             map:layout_constraintTop_toTopOf="parent"
             map:layout_constraintVertical_bias="0.435" />
 
-        <ImageView
-            android:id="@+id/imageView23"
-            android:layout_width="@dimen/sizeeeess"
-            android:layout_height="@dimen/sizeeeess"
-            android:layout_marginBottom="8dp"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="370dp"
+            android:layout_height="270dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:padding="5dp"
-            android:src="@mipmap/traffic"
             map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintHorizontal_bias="0.027"
             map:layout_constraintLeft_toLeftOf="parent"
             map:layout_constraintRight_toRightOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.382"
-            tools:ignore="ContentDescription" />
+            map:layout_constraintTop_toBottomOf="parent"
+            map:layout_constraintVertical_bias="1.0"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1" />
 
         <Button
-            android:id="@+id/btnFindPath"
+            android:id="@+id/sendAddress"
             android:layout_width="120dp"
             android:layout_height="82dp"
             android:layout_marginBottom="8dp"
@@ -178,7 +177,7 @@
             android:text="Send Address"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintHorizontal_bias="0.2"
-            map:layout_constraintLeft_toRightOf="@+id/editText4"
+            map:layout_constraintLeft_toRightOf="@+id/busstatus"
             map:layout_constraintRight_toRightOf="parent"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
@@ -186,7 +185,7 @@
             tools:ignore="ContentDescription" />
 
     </android.support.constraint.ConstraintLayout>
-    <!--<include
+    <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -198,5 +197,5 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />-->
+        app:menu="@menu/activity_main_drawer" />
 </android.support.v4.widget.DrawerLayout>
