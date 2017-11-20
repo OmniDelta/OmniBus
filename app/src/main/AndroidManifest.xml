@@ -11,16 +11,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAZHbFkBJRc2-l06UH1dEbAw5x8evcUTUE" />
-        <activity android:name=".Login">
+        <activity android:name=".Login" android:theme="@style/Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".StudentHome" android:parentActivityName=".Login" android:label="Home"></activity>
-        <activity android:name=".Settings" android:parentActivityName=".Login" android:label="Settings"></activity>
-        <activity android:name=".DriverHome" android:parentActivityName=".Login" android:label="Home"></activity>
+        <activity android:name=".StudentHome" android:label="Home"></activity>
+        <activity android:name=".Settings" android:label="Settings" android:parentActivityName=".StudentHome"></activity>
+        <activity android:name=".DriverHome" android:label="Home"></activity>
         <activity android:name=".Dev" android:parentActivityName=".Login" android:label="DEV PAGE"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>

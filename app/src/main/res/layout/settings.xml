@@ -29,7 +29,7 @@
         tools:ignore="Deprecated" />
 
     <Switch
-        android:id="@+id/eta"
+        android:id="@+id/tvEta"
         android:layout_width="53dp"
         android:layout_height="30dp"
         android:layout_marginBottom="8dp"
