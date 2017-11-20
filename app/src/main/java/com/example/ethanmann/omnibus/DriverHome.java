@@ -78,6 +78,8 @@ public class DriverHome extends AppCompatActivity {
                 // Failed to read value
                 Log.w("TAG:", "Failed to read value.", error.toException());
             }
+
+
         });
 
         // Delete items when clicked
