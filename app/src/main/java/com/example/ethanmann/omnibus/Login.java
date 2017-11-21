@@ -1,14 +1,17 @@
 package com.example.ethanmann.omnibus;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,6 +29,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.squareup.picasso.Picasso;
+
+import java.util.jar.Attributes;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
@@ -34,13 +40,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
     private FirebaseAuth mAuth;
     private static final int REQUEST_CODE = 9001;
     private static final String TAG = "GoogleActivity";
+    private ImageView imageView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String auth = "891393428287-b38vgt106eg2i7dggdclurr94505aa4d.apps.googleusercontent.com";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        findViewById(R.id.sign_out_button).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(auth)
                 .requestEmail()
@@ -50,11 +59,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
         mAuth = FirebaseAuth.getInstance();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
@@ -68,6 +72,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                               updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -79,31 +84,40 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
                 });
     }
 
+    void updateUI(FirebaseUser user){
+        if(user != null) {
+            String img_url = user.getPhotoUrl().toString();
+            Glide.with(this).load(img_url).into(imageView2);
+        }
+    }
+
    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
                 break;
+            case R.id.sign_out_button:
+                signOut();
+                break;
         }
     }
 
+    private void signOut() {
+        mAuth.signOut();
+        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                            updateUI(null);
+                    }
+                });
+    }
 
     private void signIn() {
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent, REQUEST_CODE);
 
-    }
-
-    private void handleResult(GoogleSignInResult result){
-        if(result.isSuccess()){
-            GoogleSignInAccount account = result.getSignInAccount();
-            String name = account.getDisplayName();
-            String email = account.getEmail();
-            String img_url = account.getPhotoUrl().toString();
-            Intent newerIntent = new Intent(Login.this, DriverHome.class);
-            startActivity(newerIntent);
-        }
     }
 
     @Override
@@ -118,7 +132,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
             }
-            handleResult(result);
         }
     }
 
