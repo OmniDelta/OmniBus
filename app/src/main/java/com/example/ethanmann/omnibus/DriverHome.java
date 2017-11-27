@@ -9,7 +9,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,7 +42,7 @@ public class DriverHome extends AppCompatActivity {
         t = (TextView) findViewById(R.id.textView);
 
         //hooks into the listView and ties the adapter to it
-        final ListView listView = (ListView) findViewById(R.id.adlist);
+        final ListView listView = (ListView) findViewById (R.id.adlist);
         final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1);
         listView.setAdapter(adapter);
