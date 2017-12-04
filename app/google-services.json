@@ -22,6 +22,14 @@
             "certificate_hash": "1665eb92afcc7ea4f3a38e7aa7878760caf8d4ca"
           }
         },
+	{
+          "client_id": "891393428287-n6domt20f48itc3b6l9n0an0fmogpeus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ethanmann.omnibus",
+            "certificate_hash": “b10341df545ba0168c6bdd829ec1ed7b4828599d”
+          }
+        },
         {
           "client_id": "891393428287-jpa0ds1tqlhlb89mebg8kd5rsjsucjps.apps.googleusercontent.com",
           "client_type": 1,

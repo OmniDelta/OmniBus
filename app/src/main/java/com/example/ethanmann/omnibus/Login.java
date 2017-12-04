@@ -1,17 +1,14 @@
 package com.example.ethanmann.omnibus;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -20,7 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,9 +25,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.squareup.picasso.Picasso;
-
-import java.util.jar.Attributes;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
@@ -85,11 +78,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
     }
 
     void updateUI(FirebaseUser user){
-        Settings.initSettings();
-        Settings.user_img_url = user.getPhotoUrl().toString();
         if(user != null) {
-            Settings.initSettings();
-            Settings.setImg(user.getPhotoUrl().toString());
+            Settings.initSettings(user);
+
             Intent student = new Intent(this, StudentHome.class);
             Intent driver = new Intent(this, DriverHome.class);
             Intent dev = new Intent(this, Dev.class);
@@ -99,9 +90,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
                 startActivity(student); //take user to StudentHome
             else if (true) //checks if user is a dev
                 startActivity(driver); //take user to DriverHome*/
-
-
-            //Glide.with(this).load(img_url).into(imageView2);
         }
     }
 
