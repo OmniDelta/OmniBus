@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "891393428287-7coljgsek3thjr952umvdsiqlmmlg4jt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ethanmann.omnibus",
+            "certificate_hash": "1665eb92afcc7ea4f3a38e7aa7878760caf8d4ca"
+          }
+        },
+        {
           "client_id": "891393428287-jpa0ds1tqlhlb89mebg8kd5rsjsucjps.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

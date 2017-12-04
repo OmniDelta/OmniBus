@@ -85,9 +85,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
     }
 
     void updateUI(FirebaseUser user){
+        Settings.initSettings();
+        Settings.user_img_url = user.getPhotoUrl().toString();
         if(user != null) {
-            String img_url = user.getPhotoUrl().toString();
-            Glide.with(this).load(img_url).into(imageView2);
+            Settings.initSettings();
+            Settings.setImg(user.getPhotoUrl().toString());
+            Intent student = new Intent(this, StudentHome.class);
+            Intent driver = new Intent(this, DriverHome.class);
+            Intent dev = new Intent(this, Dev.class);
+            if (true) //checks if user is a student
+                startActivity(student); //opens dev page
+            /*else if(((EditText)findViewById(R.id.username)).getText().toString().equalsIgnoreCase("s")) //checks if user is driver
+                startActivity(student); //take user to StudentHome
+            else if (true) //checks if user is a dev
+                startActivity(driver); //take user to DriverHome*/
+
+
+            //Glide.with(this).load(img_url).into(imageView2);
         }
     }
 
