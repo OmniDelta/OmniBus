@@ -1,103 +1,423 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/editText"
-        android:layout_width="228dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="About Us"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
 
-    <TextView
-        android:id="@+id/editText7"
-        android:layout_width="362dp"
-        android:layout_height="243dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="104dp"
-        android:ems="10"
-        android:fontFamily="casual"
-        android:inputType="textMultiLine"
-        android:text="Omnibus is a product of omnidelta. It's an application for students, by students. Using gps tracking and one way preset messaging between students and drivers, it's our goal to let students and parents know the exact location of their bus to minimize communication errors and time spent en route"
-        android:textAlignment="center"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="jelly_bean" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/logo_words"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="198dp"
-        android:layout_height="96dp"
-        app:srcCompat="@mipmap/logo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/editText"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/prod_of_omnidelta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-condensed"
+            android:inputType="textMultiLine"
+            android:text="A product of OmniDelta"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="151dp" />
 
-    <TextView
-        android:id="@+id/editText8"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Team Members"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/editText7"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prod_of_omnidelta"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="87dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-condensed"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="4sp"
+            android:text="Using GPS tracking and one way preset messaging between students and drivers, it\'s our goal to let students and parents know the exact location of their bus to minimize communication errors and time spent en route"
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/editText9"
-        android:layout_width="337dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="Ethan Mann, Jake McNeil, Eduardo Mena, Angelo Rodriguez, Elijah Rodriguez, Carolyne Velazquez, Kenny Wright"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.98"
-        app:layout_constraintHorizontal_bias="0.258" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/for_student_by_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prod_of_omnidelta"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:fontFamily="sans-serif-condensed"
+            android:inputType="textMultiLine"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            tools:text="An application for students, by students." />
+
+        <TextView
+            android:id="@+id/meeet_the_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:text="Meet the Team"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ethanPic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_ethan"
+            android:layout_below="@+id/meeet_the_team"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/ethanName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Ethan Mann"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/ethanPic"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="13dp"
+            android:layout_alignLeft="@+id/ethanRoles"
+            android:layout_alignStart="@+id/ethanRoles" />
+
+        <TextView
+            android:id="@+id/ethanRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Chief Operating Officer, Assistant Director of Technology, Multimedia Marketing, Developer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="12sp"
+            android:layout_above="@+id/elijahPic"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:layout_alignLeft="@+id/jakeRoles"
+            android:layout_alignStart="@+id/jakeRoles" />
+
+        <ImageView
+            android:id="@+id/elijahPic"
+            android:layout_width="@android:dimen/thumbnail_width"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_elijah"
+            android:layout_below="@+id/ethanPic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="11dp" />
+
+        <TextView
+            android:id="@+id/elijahNamne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Elijah Rodriguez"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/elijahPic"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="21dp"
+            android:layout_toRightOf="@+id/elijahPic"
+            android:layout_toEndOf="@+id/elijahPic" />
+
+        <TextView
+            android:id="@+id/elijahRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/elijahNamne"
+            android:layout_toEndOf="@+id/elijahPic"
+            android:layout_toRightOf="@+id/elijahPic"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Assistant Director of Design, Graphics Marketing Developer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/jakePic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_jake"
+            android:layout_below="@+id/elijahPic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/jakeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/jakePic"
+            android:layout_marginTop="26dp"
+            android:layout_toEndOf="@+id/jakePic"
+            android:layout_toRightOf="@+id/jakePic"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Jake McNeil"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/jakeRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/meeet_the_team"
+            android:layout_alignRight="@+id/meeet_the_team"
+            android:layout_below="@+id/jakeName"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:text="Assistant Director of Public Relations, Lead Programmer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/kennyPic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_kenny"
+            android:layout_below="@+id/jakePic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="18dp" />
+
+        <TextView
+            android:id="@+id/kennyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/jakeRoles"
+            android:layout_alignRight="@+id/jakeRoles"
+            android:layout_alignTop="@+id/kennyPic"
+            android:layout_marginTop="23dp"
+            android:layout_toEndOf="@+id/kennyPic"
+            android:layout_toRightOf="@+id/kennyPic"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Kenny Wright"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/kennyRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Director of Technology, Director of Marketing, Inter-Company Communications Manager, Website Lead Developer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp"
+            android:layout_below="@+id/kennyName"
+            android:layout_toRightOf="@+id/kennyPic"
+            android:layout_toEndOf="@+id/kennyPic" />
+
+        <ImageView
+            android:id="@+id/angeloPic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_angelo"
+            android:layout_below="@+id/kennyRoles"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/angeloName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Angelo Rodriguez"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/angeloPic"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/angeloPic"
+            android:layout_toEndOf="@+id/angeloPic" />
+
+        <TextView
+            android:id="@+id/angeloRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Director of Public Relations"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp"
+            android:layout_below="@+id/angeloName"
+            android:layout_alignRight="@+id/kennyName"
+            android:layout_alignEnd="@+id/kennyName" />
+
+        <ImageView
+            android:id="@+id/eduardoPic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_eduardo"
+            android:layout_below="@+id/angeloPic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/eduardoName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Eduardo Mena"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/eduardoPic"
+            android:layout_toRightOf="@+id/eduardoPic"
+            android:layout_toEndOf="@+id/eduardoPic" />
+
+        <TextView
+            android:id="@+id/eduardoRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Assistant Director of Technology, Programmer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp"
+            android:layout_below="@+id/eduardoName"
+            android:layout_alignLeft="@+id/angeloRoles"
+            android:layout_alignStart="@+id/angeloRoles" />
+
+        <ImageView
+            android:id="@+id/kevinPic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_kevin"
+            android:layout_below="@+id/eduardoPic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="17dp" />
+
+        <TextView
+            android:id="@+id/kevinName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Kevin Solano"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/kevinPic"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/eduardoName"
+            android:layout_alignStart="@+id/eduardoName" />
+
+        <TextView
+            android:id="@+id/kevinRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Assistant Director of Marketing, Programmer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp"
+            android:layout_below="@+id/kevinName"
+            android:layout_alignLeft="@+id/eduardoRoles"
+            android:layout_alignStart="@+id/eduardoRoles" />
+
+        <ImageView
+            android:id="@+id/carolynePic"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="@android:dimen/thumbnail_width"
+            app:srcCompat="@drawable/staff_pic_elijah"
+            android:layout_alignBottom="@+id/carolyneRoles"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/carolyneName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Carolyne Velazquez"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/kevinPic"
+            android:layout_alignLeft="@+id/carolyneRoles"
+            android:layout_alignStart="@+id/carolyneRoles" />
+
+        <TextView
+            android:id="@+id/carolyneRoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/jakeRoles"
+            android:layout_alignStart="@+id/jakeRoles"
+            android:layout_below="@+id/carolyneName"
+            android:layout_marginTop="19dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-smallcaps"
+            android:inputType="textMultiLine"
+            android:text="Director of Design, Technology Dept: Head of Layouts, Graphic Marketing Developer"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</ScrollView>

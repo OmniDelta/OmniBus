@@ -299,7 +299,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         Intent settings = new Intent(this, Settings.class);
         Intent help = new Intent(this, StudentHome.class);
         Intent feedback = new Intent(this, StudentHome.class);
-        Intent about = new Intent(this, StudentHome.class);
+        Intent about = new Intent(this, About.class);
 
         if (id == R.id.nav_home) {
             startActivity(home);
