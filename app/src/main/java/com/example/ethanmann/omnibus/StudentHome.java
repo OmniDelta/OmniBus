@@ -71,6 +71,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Intent intent = getIntent();
+        DatabaseReference user = database.getReference("users/"+Settings.UID);
 //
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

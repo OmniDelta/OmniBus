@@ -25,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
@@ -34,7 +36,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
     private static final int REQUEST_CODE = 9001;
     private static final String TAG = "GoogleActivity";
     private ImageView imageView2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String auth = "891393428287-b38vgt106eg2i7dggdclurr94505aa4d.apps.googleusercontent.com";
@@ -80,16 +81,24 @@ public class Login extends AppCompatActivity implements View.OnClickListener,Goo
     void updateUI(FirebaseUser user){
         if(user != null) {
             Settings.initSettings(user);
-
             Intent student = new Intent(this, StudentHome.class);
             Intent driver = new Intent(this, DriverHome.class);
             Intent dev = new Intent(this, Dev.class);
-            if (true) //checks if user is a student
-                startActivity(student); //opens dev page
-            /*else if(((EditText)findViewById(R.id.username)).getText().toString().equalsIgnoreCase("s")) //checks if user is driver
+            Intent newUser = new Intent(this, NewUser.class);
+            System.out.println("DONZO");
+            System.out.println("DONZO");
+            System.out.println("DONZO");
+            System.out.println("DONZO");
+            System.out.println("DONZO");
+
+            if (Settings.user_type.equalsIgnoreCase("student")) //checks if user is a student
                 startActivity(student); //take user to StudentHome
-            else if (true) //checks if user is a dev
-                startActivity(driver); //take user to DriverHome*/
+            else if(Settings.user_type.equalsIgnoreCase("driver")) //checks if user is driver
+                startActivity(student); //take user to DriverHome
+            else if (Settings.user_type.equalsIgnoreCase("dev"))  //checks if user is a dev
+                startActivity(driver); //take user to Dev
+            else //userType is not defined yet
+                startActivity(newUser); //takes user to NewUser page to define userType
         }
     }
 
