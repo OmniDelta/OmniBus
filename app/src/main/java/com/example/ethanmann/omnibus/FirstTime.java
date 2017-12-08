@@ -6,14 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-
-public class NewUser extends AppCompatActivity {
-    boolean studentBool = true;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference userType = database.getReference("users/"+Settings.UID+"/accountType");
+public class FirstTime extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +15,7 @@ public class NewUser extends AppCompatActivity {
         final Button student = findViewById(R.id.student);
         student.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                userType.setValue("Student");
+                Settings.setUserType("Student");
                 start(true);
             }
         });
@@ -30,17 +23,17 @@ public class NewUser extends AppCompatActivity {
         final Button driver = findViewById(R.id.driver);
         driver.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                userType.setValue("Driver");
+                Settings.setUserType("Driver");
                 start(false);
             }
         });
 
     }
     private void start(boolean b) {
-        Intent Istudent = new Intent(this, StudentHome.class);
+        Intent studentLogin = new Intent(this, StudentLogin.class);
         Intent Idriver = new Intent(this, DriverHome.class);
         if(b)
-            startActivity(Istudent);
+            startActivity(studentLogin);
         else
             startActivity(Idriver);
     }

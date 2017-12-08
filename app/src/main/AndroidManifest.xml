@@ -11,18 +11,18 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAZHbFkBJRc2-l06UH1dEbAw5x8evcUTUE" />
-        <activity android:name=".Login" android:theme="@style/Login">
+        <activity android:name=".FirstTime">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
+        <activity android:name=".StudentLogin" android:theme="@style/Login" android:label="StudentHome"></activity>
         <activity android:name=".StudentHome" android:label="StudentHome"></activity>
         <activity android:name=".Settings" android:label="Settings" android:parentActivityName=".StudentHome"></activity>
         <activity android:name=".DriverHome" android:label="Home"></activity>
-        <activity android:name=".Dev" android:parentActivityName=".Login" android:label="DEV PAGE"></activity>
-        <activity android:name=".NewUser" android:parentActivityName=".Login" android:label="Welcome!"></activity>
+        <activity android:name=".Dev"   android:label="DEV PAGE"></activity>
         <activity android:name=".About" android:parentActivityName=".StudentHome" android:label="About"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>

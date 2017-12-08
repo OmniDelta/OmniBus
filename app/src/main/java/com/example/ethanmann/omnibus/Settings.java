@@ -24,23 +24,14 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
     }
-    public static void getUserType() {
-        DatabaseReference userType = database.getReference("users/"+Settings.UID+"/accountType");
-        userType.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String userType = dataSnapshot.getValue(String.class);
-                user_type = userType;
-            }
-            @Override public void onCancelled(DatabaseError databaseError) {}
-        });
+    public static void setUserType(String type){
+        user_type = type;
     }
     public static void initSettings(FirebaseUser user){ //sets appropriate variables and toggles state of settings on settings page
         UID = user.getUid();
         user_name = user.getDisplayName();
         user_email = user.getEmail();
         user_img_url = user.getPhotoUrl().toString();
-        getUserType();
 
     }
 }

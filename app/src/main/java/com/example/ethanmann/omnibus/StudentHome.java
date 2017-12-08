@@ -144,7 +144,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         });
 
         final Button button = (Button) findViewById(R.id.sendAddress);
-
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -156,6 +155,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
             }
         });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -170,7 +170,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
 
     private void sendRequest() {
-        //busLocation = busLocationDB.getValue(St);
         if (userLocation.isEmpty()) {
             Toast.makeText(this, "Can't find your location!", Toast.LENGTH_SHORT).show();
             return;
