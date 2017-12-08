@@ -47,8 +47,8 @@ public class DriverHome extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         // Get a reference to the todoItems child items it the database
-        final DatabaseReference Address = database.getReference("todoItems");
-        final DatabaseReference busLocation = database.getReference("locationtrack");
+        final DatabaseReference Address = database.getReference("busses/A/not_riding");
+        final DatabaseReference busLocation = database.getReference("busses/A/location");
 
         // Assign a listener to detect changes to the child items
         // of the database reference.

@@ -1,27 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <Button
-        android:id="@+id/student"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Student"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="234dp" />
+        android:stretchColumns="1">
 
-    <Button
-        android:id="@+id/driver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Driver"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student" />
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/logo_words" />
+
+        <TextView
+            android:id="@+id/multiAutoCompleteTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="casual"
+            android:text="I am a"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/student"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/multiAutoCompleteTextView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/holo_orange_light"
+            android:text="Student"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/driver"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_alignStart="@+id/student"
+            android:layout_below="@+id/student"
+            android:layout_marginTop="42dp"
+            android:background="@android:color/holo_red_light"
+            android:text="Driver"
+            android:textSize="24sp" />
+    </RelativeLayout>
+</ScrollView>

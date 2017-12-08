@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class DirectionFinder {
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
+    private static final String GOOGLE_API_KEY = "AIzaSyDKAaZVsh0BvRZEDL5UGDKi_DNAAwWmGbQ";
     private DirectionFinderListener listener;
     private String origin;
     private String destination;
@@ -40,8 +41,11 @@ public class DirectionFinder {
     private String createUrl() throws UnsupportedEncodingException {
         String urlOrigin = URLEncoder.encode(origin, "utf-8");
         String urlDestination = URLEncoder.encode(destination, "utf-8");
-
-        return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
+        String url = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
+        System.out.println(url);
+        System.out.println(url);
+        System.out.println(url);
+        return url;
     }
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {
@@ -51,7 +55,9 @@ public class DirectionFinder {
             String link = params[0];
             try {
                 URL url = new URL(link);
-                InputStream is = url.openConnection().getInputStream();
+                HttpURLConnection urlConnection = (HttpURLConnection) url
+                        .openConnection();
+                InputStream is = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 

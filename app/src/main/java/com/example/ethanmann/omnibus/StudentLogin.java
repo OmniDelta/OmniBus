@@ -39,7 +39,6 @@ public class StudentLogin extends AppCompatActivity implements View.OnClickListe
         String auth = "891393428287-b38vgt106eg2i7dggdclurr94505aa4d.apps.googleusercontent.com";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        imageView2 = (ImageView) findViewById(R.id.imageView2);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

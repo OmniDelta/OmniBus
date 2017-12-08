@@ -64,14 +64,15 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
     // Connect to the Firebase database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     // Get a reference to the todoItems child items it the database
-    final DatabaseReference myRef = database.getReference("todoItems");
-    final DatabaseReference busLocationDB = database.getReference("locationtrack");
+    final DatabaseReference myRef = database.getReference("busses/A/not_riding");
+    final DatabaseReference busLocationDB = database.getReference("busses/A/location");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Intent intent = getIntent();
-        DatabaseReference user = database.getReference("users/"+Settings.UID);
+        DatabaseReference user = database.getReference("users/students/"+Settings.UID+"/accountType");
+        user.setValue("Student");
 //
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,6 +91,35 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         ImageView userImg = headerView.findViewById(R.id.userImg);
         //Glide.with(this).load(Settings.user_img_url).into(userImg);
 //
+        busLocationDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String location = dataSnapshot.getValue(String.class);
+                busLocation=location;
+                System.out.println("BUS LOCATION IS: " + busLocation);
+                sendRequest();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        busLocationDB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String location = dataSnapshot.getValue(String.class);
+                busLocation=location;
+                System.out.println("BUS LOCATION IS: " + busLocation);
+                sendRequest();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
         // first check for permissions
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -98,7 +128,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
             }
             return;
         }
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         listener = new LocationListener() {
             @Override
@@ -127,21 +156,6 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates("gps", 100, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 0, listener);
-
-        busLocationDB.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String location = dataSnapshot.getValue(String.class);
-                busLocation=location;
-                System.out.println("BUS LOCATION IS: " + busLocation);
-                sendRequest();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
 
         final Button button = (Button) findViewById(R.id.sendAddress);
         button.setOnClickListener(new View.OnClickListener() {
