@@ -17,7 +17,7 @@ public class Settings extends AppCompatActivity {
     public static String user_img_url = "";
     public static String user_type = "";
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+    DatabaseReference userSettings = database.getReference("users/students/"+Settings.UID+"/Settings");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
