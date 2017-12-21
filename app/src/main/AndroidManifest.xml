@@ -24,6 +24,7 @@
         <activity android:name=".DriverHome" android:label="Home"></activity>
         <activity android:name=".Dev"   android:label="DEV PAGE"></activity>
         <activity android:name=".About" android:parentActivityName=".StudentHome" android:label="About"></activity>
+        <activity android:name=".WIP" android:parentActivityName=".StudentHome" android:label="WIP"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>

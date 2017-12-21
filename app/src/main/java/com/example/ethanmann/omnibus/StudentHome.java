@@ -314,26 +314,27 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         Intent help = new Intent(this, StudentHome.class);
         Intent feedback = new Intent(this, StudentHome.class);
         Intent about = new Intent(this, About.class);
+        Intent wip = new Intent(this, WIP.class);
 
         if (id == R.id.nav_home) {
             startActivity(home);
         } else if (id == R.id.nav_analytics) {
-            startActivity(analytics);
+            startActivity(wip);
         } else if (id == R.id.nav_businfo) {
             startActivity(businfo);
         } else if (id == R.id.nav_other) {
-            startActivity(other);
+            startActivity(wip);
         } else if (id == R.id.nav_settings) {
             startActivity(settings);
         } else if (id == R.id.nav_help) {
-            startActivity(help);
+            startActivity(wip);
         } else if (id == R.id.nav_feedback) {
-            startActivity(feedback);
+            startActivity(wip);
         } else if (id == R.id.nav_about) {
             startActivity(about);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
