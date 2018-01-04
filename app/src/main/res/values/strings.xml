@@ -5,4 +5,14 @@
     <string name="action_settings">Settings</string>
     <string name="userName">Omnibus</string>
     <string name="userEmail">omnideltatechnologies@gmail.com</string>
+    <string-array name="feedback_types">
+        <item>General/Other</item>
+        <item>Question</item>
+        <item>Suggestion</item>
+        <item>Bug Report</item>
+        <item>Complaint</item>
+        <item>Compliment</item>
+        <item>Positive</item>
+        <item>Negative</item>
+    </string-array>
 </resources>

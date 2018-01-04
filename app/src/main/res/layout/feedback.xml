@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/feedback_text"
+        android:layout_width="294dp"
+        android:layout_height="273dp"
+        android:layout_above="@+id/sendFeedback"
+        android:layout_alignStart="@+id/feedbackType_text"
+        android:layout_alignTop="@+id/spinner"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Give us your feedback here."
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="187dp" />
+
+    <TextView
+        android:id="@+id/feedback_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:inputType="textMultiLine"
+        android:text="Questions? Comments? Critiques? Let us know! We love feedback!"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="169dp"
+        android:layout_height="26dp"
+        android:layout_alignTop="@+id/feedbackType_text"
+        android:layout_toEndOf="@+id/feedbackType_text"
+        android:entries="@array/feedback_types"
+        app:layout_constraintBottom_toTopOf="@+id/feedback_text"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_desc"
+        tools:layout_editor_absoluteX="170dp" />
+
+    <TextView
+        android:id="@+id/feedbackType_text"
+        android:layout_width="121dp"
+        android:layout_height="27dp"
+        android:layout_alignStart="@+id/feedback_desc"
+        android:layout_below="@+id/feedback_desc"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Feedback Type:"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/feedback_text"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_desc" />
+
+    <Button
+        android:id="@+id/sendFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp"
+        android:text="Send Feedback"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedback_text"
+        tools:layout_editor_absoluteX="127dp" />
+
+</RelativeLayout>

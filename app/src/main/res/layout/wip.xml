@@ -35,7 +35,7 @@
         android:layout_below="@+id/autoCompleteTextView"
         android:layout_centerHorizontal="true" />
 
-    <AutoCompleteTextView
+    <TextView
         android:id="@+id/autoCompleteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

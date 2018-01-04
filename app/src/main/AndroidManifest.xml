@@ -18,12 +18,14 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".StudentLogin" android:theme="@style/Login" android:label="StudentHome"></activity>
-        <activity android:name=".StudentHome" android:label="StudentHome"></activity>
+        <activity android:name=".StudentLogin" android:theme="@style/Login" android:label="Login"></activity>
+        <activity android:name=".StudentHome" android:label="Student Home"></activity>
         <activity android:name=".Settings" android:label="Settings" android:parentActivityName=".StudentHome"></activity>
         <activity android:name=".DriverHome" android:label="Home"></activity>
         <activity android:name=".Dev"   android:label="DEV PAGE"></activity>
         <activity android:name=".About" android:parentActivityName=".StudentHome" android:label="About"></activity>
+        <activity android:name=".Feedback" android:parentActivityName=".StudentHome" android:label="Feedback"></activity>
+        <activity android:name=".BusInfo" android:parentActivityName=".StudentHome" android:label="Bus Info"></activity>
         <activity android:name=".WIP" android:parentActivityName=".StudentHome" android:label="WIP"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>

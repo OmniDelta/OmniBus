@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -58,21 +57,23 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
     private List<Polyline> polylinePaths = new ArrayList<>();
     private ProgressDialog progressDialog;
     private String userLocation = "";
+    private String userStop_string = "";
     private String busLocation = "";
     private LocationManager locationManager;
     private LocationListener listener;
     // Connect to the Firebase database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     // Get a reference to the todoItems child items it the database
-    final DatabaseReference myRef = database.getReference("busses/A/not_riding");
+    final DatabaseReference notRiding = database.getReference("busses/A/not_riding");
     final DatabaseReference busLocationDB = database.getReference("busses/A/location");
+    DatabaseReference userStop = database.getReference("users/students/"+Settings.UID+"/stop");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
         Intent intent = getIntent();
-        DatabaseReference user = database.getReference("users/students/"+Settings.UID+"/accountType");
-        user.setValue("Student");
+        DatabaseReference userType = database.getReference("users/students/"+Settings.UID+"/accountType");
+        userType.setValue("Student");
 //
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,7 +91,20 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         ((TextView) headerView.findViewById(R.id.userEmail)).setText(Settings.user_email);
         ImageView userImg = headerView.findViewById(R.id.userImg);
         //Glide.with(this).load(Settings.user_img_url).into(userImg);
-//
+
+        userStop.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String stop = dataSnapshot.getValue(String.class);
+                userStop_string = stop;
+                System.out.println("USERS STOP IS " + stop);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
         busLocationDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -162,10 +176,23 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
             public void onClick(View v) {
 
                 // Create a new child with a auto-generated ID.
-                DatabaseReference childRef = myRef.push();
+                DatabaseReference childRef = notRiding.push();
 
-                // Set the child's data to the value passed in from the text box.
-                childRef.setValue("136 Palamar Drive");
+                //get the user's stop
+                userStop.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String stop = dataSnapshot.getValue(String.class);
+                        userStop_string = stop;
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("The read failed: " + databaseError.getCode());
+                    }
+                });
+
+                // Set the child's data to the user's stop
+                childRef.setValue(userStop_string);
 
             }
         });
@@ -184,11 +211,23 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
 
     private void sendRequest() {
-        if (userLocation.isEmpty()) {
+        if (((userStop_string != null) && (busLocation != null))&& !(userStop_string.isEmpty()) && !(busLocation.isEmpty())) {
+            System.out.println("STARTING REQUEST WITH USER STOP [" + userStop_string + "] AND BUS LOCATION [" + busLocation + "]");
+            try {
+                new DirectionFinder(this, userLocation, busLocation).execute();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        if ((userStop_string != null) && userStop_string.isEmpty()) {
+            Toast.makeText(this, "Stop not yet found. Using location.", Toast.LENGTH_SHORT).show();
+        }
+        if ((userLocation != null) && userLocation.isEmpty()) {
             Toast.makeText(this, "Can't find your location!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (busLocation.isEmpty()) {
+        if ((busLocation != null) && busLocation.isEmpty()) {
             Toast.makeText(this, "Can't find your bus!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -308,11 +347,11 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
 
         Intent home = new Intent(this, StudentHome.class);
         Intent analytics = new Intent(this, StudentHome.class);
-        Intent businfo = new Intent(this, StudentHome.class);
+        Intent businfo = new Intent(this, BusInfo.class);
         Intent other = new Intent(this, StudentHome.class);
         Intent settings = new Intent(this, Settings.class);
         Intent help = new Intent(this, StudentHome.class);
-        Intent feedback = new Intent(this, StudentHome.class);
+        Intent feedback = new Intent(this, Feedback.class);
         Intent about = new Intent(this, About.class);
         Intent wip = new Intent(this, WIP.class);
 
@@ -329,7 +368,7 @@ public class StudentHome extends AppCompatActivity implements OnMapReadyCallback
         } else if (id == R.id.nav_help) {
             startActivity(wip);
         } else if (id == R.id.nav_feedback) {
-            startActivity(wip);
+            startActivity(feedback);
         } else if (id == R.id.nav_about) {
             startActivity(about);
         }
