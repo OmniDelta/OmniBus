@@ -40,7 +40,7 @@ public class StudentLogin extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(auth)
                 .requestEmail()
@@ -89,22 +89,10 @@ public class StudentLogin extends AppCompatActivity implements View.OnClickListe
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case R.id.sign_out_button:
-                signOut();
-                break;
+
         }
     }
 
-    private void signOut() {
-        mAuth.signOut();
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                            updateUI(null);
-                    }
-                });
-    }
 
     private void signIn() {
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);

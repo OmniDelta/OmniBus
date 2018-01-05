@@ -4,7 +4,8 @@
     android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1">
+    android:stretchColumns="1"
+    android:theme="@style/branch">
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/info_district"
         android:layout_below="@+id/textView5"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="18dp"
         android:text="Loading . . ."
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"

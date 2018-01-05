@@ -4,21 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/feedback_text"
-        android:layout_width="294dp"
-        android:layout_height="273dp"
-        android:layout_above="@+id/sendFeedback"
-        android:layout_alignStart="@+id/feedbackType_text"
-        android:layout_alignTop="@+id/spinner"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="Give us your feedback here."
-        android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="187dp" />
+    android:layout_height="match_parent"
+    android:theme="@style/branch">
 
     <TextView
         android:id="@+id/feedback_desc"
@@ -59,7 +46,7 @@
         android:text="Feedback Type:"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/feedback_text"
         app:layout_constraintEnd_toStartOf="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/feedback_desc" />
@@ -68,12 +55,47 @@
         android:id="@+id/sendFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/feedbackMsg"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="33dp"
+        android:layout_marginTop="62dp"
         android:text="Send Feedback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feedback_text"
         tools:layout_editor_absoluteX="127dp" />
+
+    <EditText
+        android:id="@+id/feedbackMsg"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/autoCompleteTextView2"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/autoCompleteTextView2"
+        android:layout_width="121dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/feedbackType_text"
+        android:layout_below="@+id/feedbackType_text"
+        android:layout_marginTop="23dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Subject:"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/autoCompleteTextView2"
+        android:layout_alignBottom="@+id/autoCompleteTextView2"
+        android:layout_alignEnd="@+id/spinner"
+        android:layout_alignRight="@+id/spinner"
+        android:layout_toEndOf="@+id/autoCompleteTextView2"
+        android:layout_toRightOf="@+id/autoCompleteTextView2"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

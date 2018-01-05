@@ -5,7 +5,8 @@
     android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1">
+    android:stretchColumns="1"
+    android:theme="@style/branch">
 
 
     <ImageView
